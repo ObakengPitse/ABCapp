@@ -1,0 +1,30 @@
+﻿@model ABCapp.Models.ProductEntity
+
+@{
+    ViewData["Title"] = "Edit Product";
+}
+
+<h2>Edit Product</h2>
+
+<form asp-action="Edit" asp-route-id="@Model.RowKey" method="post" enctype="multipart/form-data">
+    <input type="hidden" name="id" value="@Model.RowKey" />
+
+    <div class="mb-3">
+        <label>Name</label>
+        <input type="text" name="name" class="form-control" value="@Model.Name" required />
+    </div>
+    <div class="mb-3">
+        <label>Description</label>
+        <textarea name="description" class="form-control" required>@Model.Description</textarea>
+    </div>
+    <div class="mb-3">
+        <label>Change Image</label>
+        <input type="file" name="image" class="form-control" />
+        @if (!string.IsNullOrEmpty(Model.ImageUrl))
+        {
+            <img src="@Model.ImageUrl" width="100" class="mt-2" />
+        }
+    </div>
+    <button type="submit" class="btn btn-primary">Save</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+</form>
