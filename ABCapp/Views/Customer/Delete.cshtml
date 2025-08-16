@@ -1,0 +1,18 @@
+﻿@model ABCapp.Models.CustomerEntity
+
+<h2>Delete Customer</h2>
+<p>Are you sure you want to delete this customer?</p>
+
+<dl class="row">
+    <dt class="col-sm-2">Name</dt>
+    <dd class="col-sm-10">@Model.Name</dd>
+
+    <dt class="col-sm-2">Email</dt>
+    <dd class="col-sm-10">@Model.Email</dd>
+</dl>
+
+<form asp-action="DeleteConfirmed" method="post">
+    <input type="hidden" name="id" value="@Model.RowKey" />
+    <button type="submit" class="btn btn-danger">Delete</button>
+    <a href="/Customer" class="btn btn-secondary">Cancel</a>
+</form>

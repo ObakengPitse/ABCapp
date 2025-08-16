@@ -40,6 +40,35 @@ namespace ABCapp.Services
             }
         }
 
+        public async Task<List<CustomerEntity>> GetCustomersAsync()
+        {
+            return _customerTable.Query<CustomerEntity>().ToList();
+        }
+
+        public async Task<CustomerEntity> GetCustomerByIdAsync(string email)
+        {
+            try
+            {
+                var response = await _customerTable.GetEntityAsync<CustomerEntity>("Customer", email);
+                return response.Value;
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
+        public async Task UpdateCustomerAsync(CustomerEntity customer)
+        {
+            await _customerTable.UpdateEntityAsync(customer, customer.ETag, TableUpdateMode.Replace);
+        }
+
+        public async Task DeleteCustomerAsync(string email)
+        {
+            await _customerTable.DeleteEntityAsync("Customer", email);
+        }
+
+
         public async Task UpdateProductAsync(ProductEntity product) =>
             await _productTable.UpdateEntityAsync(product, product.ETag, TableUpdateMode.Replace);
 

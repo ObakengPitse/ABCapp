@@ -1,0 +1,28 @@
+﻿@model List<ABCapp.Models.CustomerEntity>
+
+<h2>Customers</h2>
+<p><a href="/Customer/Create">Add New Customer</a></p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var customer in Model)
+        {
+            <tr>
+                <td>@customer.Name</td>
+                <td>@customer.Email</td>
+                
+                <td>
+                    <a href="/Customer/Edit/@customer.RowKey">Edit</a> |
+                    <a href="/Customer/Delete/@customer.RowKey">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
